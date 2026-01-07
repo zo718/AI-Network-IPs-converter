@@ -1,5 +1,5 @@
 # AI-Network-IPs-converter
-A collection of tools created using Codes AI.
+A collection of tools created using Codex AI.
 
 ## Local Web App
 This repo now includes a lightweight Flask app that provides:

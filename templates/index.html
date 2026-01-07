@@ -54,6 +54,22 @@
                   <div class="octet-chip">{{ value }}</div>
                 {% endfor %}
               </div>
+              <div class="bit-row">
+                <span>Bit weights</span>
+                {% for weight in [128, 64, 32, 16, 8, 4, 2, 1] %}
+                  <div class="bit-chip">{{ weight }}</div>
+                {% endfor %}
+              </div>
+              <div class="bit-grid">
+                {% for octet in decimal_result.output_octets %}
+                  <div class="bit-grid-row">
+                    <span>Octet {{ loop.index }}</span>
+                    {% for bit in octet %}
+                      <div class="bit-chip">{{ bit }}</div>
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+              </div>
             </div>
           {% endif %}
         {% endif %}
@@ -83,6 +99,22 @@
                 <span>Binary octets</span>
                 {% for value in binary_result.input_octets %}
                   <div class="octet-chip">{{ value }}</div>
+                {% endfor %}
+              </div>
+              <div class="bit-row">
+                <span>Bit weights</span>
+                {% for weight in [128, 64, 32, 16, 8, 4, 2, 1] %}
+                  <div class="bit-chip">{{ weight }}</div>
+                {% endfor %}
+              </div>
+              <div class="bit-grid">
+                {% for octet in binary_result.input_octets %}
+                  <div class="bit-grid-row">
+                    <span>Octet {{ loop.index }}</span>
+                    {% for bit in octet %}
+                      <div class="bit-chip">{{ bit }}</div>
+                    {% endfor %}
+                  </div>
                 {% endfor %}
               </div>
               <div class="octet-row">

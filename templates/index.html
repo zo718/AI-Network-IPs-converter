@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IP Address Toolkit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div>
+          <h1>IP Address Toolkit</h1>
+          <p>
+            Convert IPv4 decimal ↔ binary and calculate usable hosts from CIDR
+            blocks. Everything runs locally via Python.
+          </p>
+        </div>
+        <div class="badge">
+          <span>IPv4</span>
+          <span>Local</span>
+        </div>
+      </header>
+
+      <section class="panel">
+        <h2>Decimal to Binary</h2>
+        <form method="post">
+          <input type="hidden" name="action" value="decimal" />
+          <label for="decimal_input">Decimal IPv4</label>
+          <input
+            id="decimal_input"
+            name="decimal_input"
+            type="text"
+            placeholder="192.168.10.25"
+            value="{{ decimal_result.raw if decimal_result and decimal_result.raw }}"
+          />
+          <p class="hint">Each octet must be 0-255.</p>
+          <button type="submit">Convert to Binary</button>
+        </form>
+        {% if decimal_result %}
+          {% if decimal_result.error %}
+            <p class="error">{{ decimal_result.error }}</p>
+          {% else %}
+            <div class="result">
+              <strong>Binary:</strong> {{ decimal_result.output }}
+            </div>
+            <div class="detail">
+              {% for line in decimal_result.detail %}
+                <div>{{ line }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endif %}
+      </section>
+
+      <section class="panel">
+        <h2>Binary to Decimal</h2>
+        <form method="post">
+          <input type="hidden" name="action" value="binary" />
+          <label for="binary_input">Binary IPv4</label>
+          <input
+            id="binary_input"
+            name="binary_input"
+            type="text"
+            placeholder="11000000.10101000.00001010.00011001"
+            value="{{ binary_result.raw if binary_result and binary_result.raw }}"
+          />
+          <p class="hint">Use 8 bits per octet, separated by dots.</p>
+          <button type="submit">Convert to Decimal</button>
+        </form>
+        {% if binary_result %}
+          {% if binary_result.error %}
+            <p class="error">{{ binary_result.error }}</p>
+          {% else %}
+            <div class="result">
+              <strong>Decimal:</strong> {{ binary_result.output }}
+            </div>
+            <div class="detail">
+              {% for line in binary_result.detail %}
+                <div>{{ line }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endif %}
+      </section>
+
+      <section class="panel">
+        <h2>Usable Hosts from CIDR</h2>
+        <form method="post">
+          <input type="hidden" name="action" value="cidr" />
+          <label for="cidr_input">IPv4 CIDR</label>
+          <input
+            id="cidr_input"
+            name="cidr_input"
+            type="text"
+            placeholder="192.168.1.0/24"
+            value="{{ cidr_result.raw if cidr_result and cidr_result.raw }}"
+          />
+          <p class="hint">
+            Accepts host or network addresses; output uses the network prefix.
+          </p>
+          <button type="submit">Calculate Hosts</button>
+        </form>
+        {% if cidr_result %}
+          {% if cidr_result.error %}
+            <p class="error">{{ cidr_result.error }}</p>
+          {% else %}
+            <div class="result">
+              <strong>Network:</strong> {{ cidr_result.cidr }}
+            </div>
+            <div class="grid">
+              <div><span>Network:</span> {{ cidr_result.network }}</div>
+              <div><span>Broadcast:</span> {{ cidr_result.broadcast }}</div>
+              <div><span>Total:</span> {{ cidr_result.total }}</div>
+              <div><span>Usable:</span> {{ cidr_result.usable }}</div>
+              <div><span>First host:</span> {{ cidr_result.first_host }}</div>
+              <div><span>Last host:</span> {{ cidr_result.last_host }}</div>
+            </div>
+            <p class="hint small">
+              Notes: /31 is treated as 2 usable hosts (RFC 3021). /32 reports 1
+              host.
+            </p>
+          {% endif %}
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

@@ -63,7 +63,7 @@
               <div class="bit-grid">
                 {% for octet in decimal_result.output_octets %}
                   <div class="bit-grid-row">
-                    <span>Octet {{ loop.index }}</span>
+                    <span>{{ decimal_result.input_octets[loop.index0] }}</span>
                     {% for bit in octet %}
                       <div class="bit-chip">{{ bit }}</div>
                     {% endfor %}
@@ -110,7 +110,7 @@
               <div class="bit-grid">
                 {% for octet in binary_result.input_octets %}
                   <div class="bit-grid-row">
-                    <span>Octet {{ loop.index }}</span>
+                    <span>{{ binary_result.output_octets[loop.index0] }}</span>
                     {% for bit in octet %}
                       <div class="bit-chip">{{ bit }}</div>
                     {% endfor %}

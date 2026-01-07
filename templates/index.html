@@ -41,13 +41,19 @@
           {% if decimal_result.error %}
             <p class="error">{{ decimal_result.error }}</p>
           {% else %}
-            <div class="result">
-              <strong>Binary:</strong> {{ decimal_result.output }}
-            </div>
-            <div class="detail">
-              {% for line in decimal_result.detail %}
-                <div>{{ line }}</div>
-              {% endfor %}
+            <div class="octet-block">
+              <div class="octet-row">
+                <span>Decimal octets</span>
+                {% for value in decimal_result.input_octets %}
+                  <div class="octet-chip">{{ value }}</div>
+                {% endfor %}
+              </div>
+              <div class="octet-row">
+                <span>Binary octets</span>
+                {% for value in decimal_result.output_octets %}
+                  <div class="octet-chip">{{ value }}</div>
+                {% endfor %}
+              </div>
             </div>
           {% endif %}
         {% endif %}
@@ -72,13 +78,19 @@
           {% if binary_result.error %}
             <p class="error">{{ binary_result.error }}</p>
           {% else %}
-            <div class="result">
-              <strong>Decimal:</strong> {{ binary_result.output }}
-            </div>
-            <div class="detail">
-              {% for line in binary_result.detail %}
-                <div>{{ line }}</div>
-              {% endfor %}
+            <div class="octet-block">
+              <div class="octet-row">
+                <span>Binary octets</span>
+                {% for value in binary_result.input_octets %}
+                  <div class="octet-chip">{{ value }}</div>
+                {% endfor %}
+              </div>
+              <div class="octet-row">
+                <span>Decimal octets</span>
+                {% for value in binary_result.output_octets %}
+                  <div class="octet-chip">{{ value }}</div>
+                {% endfor %}
+              </div>
             </div>
           {% endif %}
         {% endif %}

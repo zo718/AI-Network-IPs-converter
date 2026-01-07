@@ -15,6 +15,8 @@ app = Flask(__name__)
 class ConversionResult:
     output: Optional[str] = None
     detail: Optional[list[str]] = None
+    input_octets: Optional[list[str]] = None
+    output_octets: Optional[list[str]] = None
     error: Optional[str] = None
     raw: Optional[str] = None
 
@@ -50,6 +52,8 @@ def decimal_to_binary(ip_str: str) -> ConversionResult:
         numbers.append(value)
     binaries = [format(value, "08b") for value in numbers]
     result.output = ".".join(binaries)
+    result.input_octets = [str(value) for value in numbers]
+    result.output_octets = binaries
     result.detail = [
         f"Octet {index + 1}: {numbers[index]} → {binaries[index]}"
         for index in range(4)
@@ -71,6 +75,8 @@ def binary_to_decimal(binary_str: str) -> ConversionResult:
         return result
     numbers = [int(part, 2) for part in parts]
     result.output = ".".join(str(num) for num in numbers)
+    result.input_octets = parts
+    result.output_octets = [str(num) for num in numbers]
     result.detail = [
         f"Octet {index + 1}: {parts[index]} → {numbers[index]}"
         for index in range(4)

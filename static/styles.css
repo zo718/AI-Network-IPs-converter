@@ -142,6 +142,33 @@ button:hover {
   gap: 6px;
 }
 
+.octet-block {
+  display: grid;
+  gap: 12px;
+}
+
+.octet-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 160px) repeat(4, minmax(80px, 1fr));
+  gap: 10px;
+  align-items: center;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.octet-row span {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.octet-chip {
+  padding: 10px 8px;
+  border-radius: 10px;
+  background: #fff3e7;
+  border: 1px solid #e2c8b3;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
 .error {
   color: var(--accent-2);
   font-weight: 600;
